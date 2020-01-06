@@ -51,6 +51,14 @@ public class ExtendArray {
         return this.size + 1 > elements.length || this.elements == DEFAULT_ARRAY;
     }
 
+    private void add(int index, int element) {
+        if (needGrow()) {
+            grow();
+        }
+        System.arraycopy(elements, index, elements, index + 1, size - index);
+        elements[index] = element;
+    }
+
     public static void main(String[] args) {
         ExtendArray arr = new ExtendArray();
         arr.add(1);
@@ -63,6 +71,9 @@ public class ExtendArray {
         arr.remove(2);
         System.out.println(arr.size());
         arr.remove(2);
+        arr.add(3);
+        arr.add(4);
+        arr.add(2, 6);
         System.out.println(arr.size());
         System.out.println(arr);
     }
