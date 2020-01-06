@@ -39,9 +39,7 @@ public class ExtendArray {
     }
 
     public void remove(int index) {
-        for (int i = index; i < size - 1; i++) {
-            elements[i] = elements[i + 1];
-        }
+        if (size - 1 - index >= 0) System.arraycopy(elements, index + 1, elements, index, size - 1 - index);
         elements[--size] = null;
     }
 
