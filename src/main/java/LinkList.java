@@ -1,48 +1,70 @@
-public class LinkList {
+
+
+public class LinkList<T> {
+    public Node<T> first ;
+    public Node<T> last;
 
     public static class Node<T> {
-        public Node preview;
+        public Node<T> preview;
         public T data;
-        public Node next;
+        public Node<T> next;
     }
 
-    public static Node<Integer> creatList(int n) {
-        Node<Integer> head = new Node<>();
-        head.data = null;
-        for (int i = 0; i < n; i++) {
-            Node<Integer> node = new Node<>();
-            node.data = i;
-            node.next = head.next;
-            head.next = node;
+    public void insert(T element) {
+        Node<T> n = new Node<>();
+        n.data = element;
+        if (first == null) {
+            first = n;
+        } else {
+            n.next = first;
+            first = n;
         }
-        return head;
     }
 
-    public static void printList(Node<Integer> head) {
-        Node<Integer> tmp = head;
+    public void remove(int index) {
+        Node<T> e = first;
+        int n = 0;
+        while (e != null) {
+            if (n == index - 1) {
+                e.next = e.next.next;
+            }
+            n++;
+            e = e.next;
+        }
+    }
+
+    public static void printList(LinkList<?> head) {
+        Node<?> tmp = head.first;
         while (tmp != null) {
             System.out.println(tmp.data);
             tmp = tmp.next;
         }
     }
 
-    public static void reverseList(Node<Integer> head) {
-        Node<Integer> q = null;
-        Node<Integer> c = head;
+    public void reverseList() {
+        Node<T> q = first;
+        Node<T> c = first.next;
+        q.next = null;
         while (c != null) {
-            Node<Integer> next = c.next;
+            Node<T> next = c.next;
             c.next = q;
             q = c;
             c = next;
         }
-        printList(q);
+        first = q;
     }
 
     public static void main(String[] args) {
         int n = 10;
-        Node<Integer> list = creatList(n);
-        printList(list);
+        LinkList<Integer> linkList = new LinkList<>();
+        for (int i = 0; i < n; i++) {
+            linkList.insert(i);
+        }
+        printList(linkList);
+        linkList.remove(3);
+        printList(linkList);
         System.out.println();
-        reverseList(list);
+        linkList.reverseList();
+        printList(linkList);
     }
 }
