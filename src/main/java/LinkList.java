@@ -1,6 +1,3 @@
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 public class LinkList {
 
     public static class Node<T> {
@@ -47,6 +44,5 @@ public class LinkList {
         printList(list);
         System.out.println();
         reverseList(list);
-//        printList(list);
     }
 }
