@@ -1,5 +1,5 @@
 
-
+// 有空不用头结点实现下
 public class LinkList<T> {
     public Node<T> first ;
     public Node<T> last;
