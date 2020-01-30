@@ -50,11 +50,33 @@ public class MergeSort {
         }
     }
 
+    public static void insertSort(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            int p = arr[i];
+            int j = i - 1;
+            for (; j >= 0; j--) {
+                if (arr[j] < p) {
+                    arr[j + 1] = arr[j];
+                } else {
+                    break;
+                }
+            }
+            arr[j + 1] = p;
+        }
+    }
+
+
     public static void main(String[] args) {
         int[] arr = {0, 3, 1, 4, 9, 6, 5, 2};
+        int[] nrr = {0, 3, 1, 4, 9, 6, 5, 2};
         mergeSort(arr);
         for (int i: arr) {
-            System.out.println(i);
+            System.out.print(i);
+        }
+        insertSort(nrr);
+        System.out.println();
+        for (int i: arr) {
+            System.out.print(i);
         }
     }
 }
