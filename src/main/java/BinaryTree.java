@@ -1,7 +1,7 @@
 
 
 public class BinaryTree {
-    private Node tree;
+    public Node tree;
 
     public Node find(int data) {
         Node p = tree;
@@ -92,12 +92,25 @@ public class BinaryTree {
         }
     }
 
+    private static void printBinaryTree(Node n) {
+        if (n == null) {
+            return;
+        }
+        printBinaryTree(n.left);
+        System.out.println(n.data);
+        printBinaryTree(n.right);
+    }
+
     public static void main(String[] args) {
         BinaryTree b = new BinaryTree();
-        b.insert(3);
         b.insert(4);
         b.insert(5);
-        System.out.println(b.find(3).data);
-        b.remove(5);
+        b.insert(2);
+        b.insert(3);
+        b.insert(7);
+        b.insert(1);
+//        System.out.println(b.find(3).data);
+//        b.remove(5);
+        printBinaryTree(b.tree);
     }
 }
