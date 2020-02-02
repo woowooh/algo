@@ -1,4 +1,5 @@
-
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BinaryTree {
     public Node tree;
@@ -54,6 +55,7 @@ public class BinaryTree {
         if (p == null) {
             return;
         }
+        // value 替换，然后转到最后结点
         if (p.left != null && p.right != null) {
             Node minP = p.right;
             Node minPP = p;
@@ -96,9 +98,45 @@ public class BinaryTree {
         if (n == null) {
             return;
         }
+        System.out.println(n.data);
         printBinaryTree(n.left);
         System.out.println(n.data);
         printBinaryTree(n.right);
+    }
+
+    public static void invertTree(Node n) {
+        if (n == null) {
+            return;
+        }
+        Node tmp = n.left;
+        n.left = n.right;
+        n.right = tmp;
+        invertTree(n.left);
+        invertTree(n.right);
+    }
+
+    public static void printByLayer(Node root) {
+        Queue<Node> list = new LinkedList<>();
+        list.add(root);
+        Node currentNode;
+        Node end = root;
+        Node lastEnqueue = new Node(1);
+        while (!list.isEmpty()) {
+            currentNode = list.remove();
+            System.out.print(currentNode.data + " ");
+            if (currentNode.left != null) {
+                list.add(currentNode.left);
+                lastEnqueue = currentNode.left;
+            }
+            if (currentNode.right != null) {
+                list.add(currentNode.right);
+                lastEnqueue = currentNode.right;
+            }
+            if (currentNode == end) {
+                System.out.println("\n");
+                end = lastEnqueue;
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -112,5 +150,9 @@ public class BinaryTree {
 //        System.out.println(b.find(3).data);
 //        b.remove(5);
         printBinaryTree(b.tree);
+        printByLayer(b.tree);
+        invertTree(b.tree);
+        System.out.println();
+        printByLayer(b.tree);
     }
 }
