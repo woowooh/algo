@@ -118,8 +118,8 @@ public class BinaryTree {
     public static void printByLayer(Node root) {
         Queue<Node> list = new LinkedList<>();
         list.add(root);
-        Node currentNode;
         Node end = root;
+        Node currentNode;
         Node lastEnqueue = new Node(1);
         while (!list.isEmpty()) {
             currentNode = list.remove();
@@ -133,7 +133,7 @@ public class BinaryTree {
                 lastEnqueue = currentNode.right;
             }
             if (currentNode == end) {
-                System.out.println("\n");
+                System.out.println();
                 end = lastEnqueue;
             }
         }
