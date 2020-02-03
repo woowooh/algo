@@ -85,7 +85,7 @@ public class BinaryTree {
     }
 
     public static class Node {
-        private int data;
+        public int data;
         private Node left;
         private Node right;
 
@@ -139,16 +139,15 @@ public class BinaryTree {
         }
     }
 
-    public static void printByLayer(int[] arr) {
+    public static void printByLayer(Heap heap) {
         int n = 1;
-        int size = arr.length;
-        System.out.println(size);
+        int size = heap.index + 1;
         int eles = n;
         while (eles <= size) {
             int l = (int)((Math.pow(2, n - 1) + Math.pow(2, n - 1)));
             int j = (int)Math.pow(2, n - 1);
             for (; j < l && j < size; j++) {
-                System.out.print(arr[j] + " ");
+                System.out.print(heap.arr[j].data + " ");
             }
             System.out.println();
             n += 1;
