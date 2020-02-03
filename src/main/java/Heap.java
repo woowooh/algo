@@ -1,17 +1,16 @@
 
 
-public class BigHeap extends Heap{
-    public BinaryTree.Node[] arr;
-    private int n;
-    public int index;
+public class Heap {
+    protected BinaryTree.Node[] arr;
+    protected int n;
+    protected int index;
 
-    public BigHeap(int capacity) {
+    public Heap(int capacity) {
         arr = new BinaryTree.Node[capacity + 1];
         n = capacity;
         index = 0;
     }
 
-    //
     public void insert(int data) {
         if (index >= n) return;
         index++;
@@ -23,7 +22,7 @@ public class BigHeap extends Heap{
         }
     }
 
-    public void removeMax() {
+    public void removeTop() {
         if (index == 0) {
             return;
         }
@@ -32,7 +31,7 @@ public class BigHeap extends Heap{
         heapify(arr, index, 1);
     }
 
-    private void heapify(BinaryTree.Node[] a, int n, int i) { // 自上往下堆化
+    protected void heapify(BinaryTree.Node[] a, int n, int i) { // 自上往下堆化
         while (true) {
             int maxPos = i;
             if (i * 2 <= n && a[i].data < a[i * 2].data) maxPos = i * 2;
@@ -43,19 +42,28 @@ public class BigHeap extends Heap{
         }
     }
 
-    public void swap(BinaryTree.Node[] arr, int src, int des) {
+    protected void swap(BinaryTree.Node[] arr, int src, int des) {
         BinaryTree.Node tmp = arr[src];
         arr[src] = arr[des];
         arr[des] = tmp;
     }
 
     public static void main(String[] args) {
-        BigHeap heap = new BigHeap(10);
+        Heap heap = new Heap(10);
+        Heap smallHeap = new SmallHeap(10);
         for (int i = 0; i < 10; i++) {
             heap.insert(i);
+            smallHeap.insert(i);
         }
         BinaryTree.printByLayer(heap);
-        heap.removeMax();
+        for (int i = 0; i < 8; i++) {
+            heap.removeTop();
+            BinaryTree.printByLayer(heap);
+        }
+        heap.removeTop();
         BinaryTree.printByLayer(heap);
+//        BinaryTree.printByLayer(smallHeap);
+//        smallHeap.removeTop();
+//        BinaryTree.printByLayer(smallHeap);
     }
 }
