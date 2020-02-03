@@ -139,6 +139,23 @@ public class BinaryTree {
         }
     }
 
+    public static void printByLayer(int[] arr) {
+        int n = 1;
+        int size = arr.length;
+        System.out.println(size);
+        int eles = n;
+        while (eles <= size) {
+            int l = (int)((Math.pow(2, n - 1) + Math.pow(2, n - 1)));
+            int j = (int)Math.pow(2, n - 1);
+            for (; j < l && j < size; j++) {
+                System.out.print(arr[j] + " ");
+            }
+            System.out.println();
+            n += 1;
+            eles += l - j;
+        }
+    }
+
     public static void main(String[] args) {
         BinaryTree b = new BinaryTree();
         b.insert(4);
