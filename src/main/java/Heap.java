@@ -1,16 +1,17 @@
 
 
-public class Heap {
+public class BigHeap extends Heap{
     public BinaryTree.Node[] arr;
     private int n;
     public int index;
 
-    public Heap(int capacity) {
+    public BigHeap(int capacity) {
         arr = new BinaryTree.Node[capacity + 1];
         n = capacity;
         index = 0;
     }
 
+    //
     public void insert(int data) {
         if (index >= n) return;
         index++;
@@ -49,7 +50,7 @@ public class Heap {
     }
 
     public static void main(String[] args) {
-        Heap heap = new Heap(10);
+        BigHeap heap = new BigHeap(10);
         for (int i = 0; i < 10; i++) {
             heap.insert(i);
         }
