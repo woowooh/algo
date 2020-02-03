@@ -42,28 +42,62 @@ public class Heap {
         }
     }
 
-    protected void swap(BinaryTree.Node[] arr, int src, int des) {
+    public static void swap(BinaryTree.Node[] arr, int src, int des) {
         BinaryTree.Node tmp = arr[src];
         arr[src] = arr[des];
         arr[des] = tmp;
     }
 
+    public static Heap buildHeap(BinaryTree.Node[] arr) {
+        Heap heap = new Heap(arr.length);
+        BinaryTree.Node[] heapArr = new BinaryTree.Node[arr.length + 1];
+        System.arraycopy(arr, 0, heapArr, 1, arr.length);
+        heap.arr = heapArr;
+        heap.index = arr.length;
+        int n = arr.length;
+        for (int i = n / 2; i >= 1; i--) {
+            heap.heapify(heap.arr, n, i);
+        }
+        return heap;
+    }
+
+    public static Heap heapSort(BinaryTree.Node[] arr) {
+        Heap heap = buildHeap(arr);
+        int n = arr.length;
+        int k = n;
+        while (k > 1) {
+            swap(heap.arr, k, 1);
+            k--;
+            heap.heapify(heap.arr, k, 1);
+        }
+        return heap;
+    }
+
     public static void main(String[] args) {
-        Heap heap = new Heap(10);
-        Heap smallHeap = new SmallHeap(10);
-        for (int i = 0; i < 10; i++) {
-            heap.insert(i);
-            smallHeap.insert(i);
-        }
-        BinaryTree.printByLayer(heap);
-        for (int i = 0; i < 8; i++) {
-            heap.removeTop();
-            BinaryTree.printByLayer(heap);
-        }
-        heap.removeTop();
-        BinaryTree.printByLayer(heap);
+//        Heap heap = new Heap(10);
+//        Heap smallHeap = new SmallHeap(10);
+//        for (int i = 0; i < 10; i++) {
+//            heap.insert(i);
+//            smallHeap.insert(i);
+//        }
+//        BinaryTree.printByLayer(heap);
+//        for (int i = 0; i < 8; i++) {
+//            heap.removeTop();
+//            BinaryTree.printByLayer(heap);
+//        }
+//        heap.removeTop();
+//        BinaryTree.printByLayer(heap);
 //        BinaryTree.printByLayer(smallHeap);
 //        smallHeap.removeTop();
 //        BinaryTree.printByLayer(smallHeap);
+        int size = 10;
+        BinaryTree.Node[] arr = new BinaryTree.Node[size];
+        for (int i = 0; i < size; i++) {
+            BinaryTree.Node n = new BinaryTree.Node(i);
+            arr[i] = n;
+        }
+//        Heap heap = buildHeap(arr);
+        Heap heap = heapSort(arr);
+        BinaryTree.printByLayer(heap);
     }
 }
