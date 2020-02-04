@@ -16,10 +16,14 @@ public class Heap {
         index++;
         arr[index] = new BinaryTree.Node(data);
         int i = index;
-        while (i / 2 > 0 && arr[i].data > arr[i / 2].data) {
+        while (i / 2 > 0 && compare(arr[i], arr[i / 2]) > 0) {
             swap(arr, i, i / 2);
             i = i / 2;
         }
+    }
+
+    public int compare(BinaryTree.Node n1, BinaryTree.Node n2) {
+        return n1.data - n2.data;
     }
 
     public void insert(BinaryTree.Node data) {
@@ -27,7 +31,7 @@ public class Heap {
         index++;
         arr[index] = data;
         int i = index;
-        while (i / 2 > 0 && arr[i].data > arr[i / 2].data) {
+        while (i / 2 > 0 && compare(arr[i], arr[i / 2]) > 0) {
             swap(arr, i, i / 2);
             i = i / 2;
         }
@@ -47,8 +51,8 @@ public class Heap {
     protected void heapify(BinaryTree.Node[] a, int n, int i) { // 自上往下堆化
         while (true) {
             int maxPos = i;
-            if (i * 2 <= n && a[i].data < a[i * 2].data) maxPos = i * 2;
-            if (i * 2 + 1 <= n && a[maxPos].data < a[i * 2 + 1].data) maxPos = i * 2 + 1;
+            if (i * 2 <= n && compare(a[i], a[i * 2]) < 0 ) maxPos = i * 2;
+            if (i * 2 + 1 <= n && compare(a[maxPos], a[i * 2 + 1]) < 0) maxPos = i * 2 + 1;
             if (maxPos == i) break;
             swap(a, i, maxPos);
             i = maxPos;
@@ -93,15 +97,8 @@ public class Heap {
             heap.insert(i);
             smallHeap.insert(i);
         }
-//        BinaryTree.printByLayer(heap);
-//        for (int i = 0; i < 8; i++) {
-//            heap.removeTop();
-//            BinaryTree.printByLayer(heap);
-//        }
-//        heap.removeTop();
-//        BinaryTree.printByLayer(heap);
-//        BinaryTree.printByLayer(smallHeap);
-//        smallHeap.removeTop();
+        BinaryTree.printByLayer(heap);
+        System.out.println();
         BinaryTree.printByLayer(smallHeap);
 //        int size = 10;
 //        BinaryTree.Node[] arr = new BinaryTree.Node[size];
