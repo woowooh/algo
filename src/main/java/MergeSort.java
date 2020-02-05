@@ -8,9 +8,11 @@ public class MergeSort {
         mergeSortInternal(arr, 0, arr.length - 1);
     }
 
-    public static void mergeCountSeq(int[] arr) {
+    public static int mergeCountSeq(int[] arr) {
+        sum = 0;
         brr = new int[arr.length];
         mergeCountInternal(arr, 0, arr.length - 1);
+        return sum;
     }
 
 
@@ -38,18 +40,15 @@ public class MergeSort {
             }
             k++;
         }
-        if (i > mid) {
-            while (j <= e) {
-                brr[k] = arr[j];
-                j++;
-                k++;
-            }
-        } else {
-            while (i <= mid) {
-                brr[k] = arr[i];
-                i++;
-                k++;
-            }
+        while (j <= e) {
+            brr[k] = arr[j];
+            j++;
+            k++;
+        }
+        while (i <= mid) {
+            brr[k] = arr[i];
+            i++;
+            k++;
         }
         for (i = s; i <= e; i++) {
             arr[i] = brr[i];
@@ -72,7 +71,6 @@ public class MergeSort {
     }
 
     public static void mergeCountInternal(int[] arr, int s, int e) {
-        sum = 0;
         if (s >= e) {
             return;
         }
@@ -97,19 +95,16 @@ public class MergeSort {
             }
             k++;
         }
-        if (i > mid) {
             while (j <= e) {
                 brr[k] = arr[j];
                 j++;
                 k++;
             }
-        } else {
             while (i <= mid) {
                 brr[k] = arr[i];
                 i++;
                 k++;
             }
-        }
         for (i = s; i <= e; i++) {
             arr[i] = brr[i];
         }
@@ -119,15 +114,8 @@ public class MergeSort {
         int[] arr = {0, 3, 1, 4, 9, 6, 5, 2};
         int[] nrr = {0, 3, 1, 4, 9, 6, 5, 2};
         mergeSort(arr);
-        for (int i: arr) {
-            System.out.print(i);
-        }
         System.out.println();
-//        insertSort(nrr);
-//        System.out.println();
-//        for (int i: arr) {
-//            System.out.print(i);
-//        }
+
         mergeCountSeq(nrr);
         System.out.println(sum);
     }
