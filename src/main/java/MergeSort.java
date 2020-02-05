@@ -2,9 +2,15 @@
 
 public class MergeSort {
     public static int[] brr;
+    public static int sum = 0;
     public static void mergeSort(int[] arr) {
         brr = new int[arr.length];
         mergeSortInternal(arr, 0, arr.length - 1);
+    }
+
+    public static void mergeCountSeq(int[] arr) {
+        brr = new int[arr.length];
+        mergeCountInternal(arr, 0, arr.length - 1);
     }
 
 
@@ -23,12 +29,12 @@ public class MergeSort {
         int j = mid + 1;
         int k = s;
         while (i <= mid && j <= e) {
-            if (arr[i] > arr[j]) {
-                brr[k] = arr[j];
-                j++;
-            } else {
+            if (arr[i] <= arr[j]) {
                 brr[k] = arr[i];
                 i++;
+            } else {
+                brr[k] = arr[j];
+                j++;
             }
             k++;
         }
@@ -65,6 +71,49 @@ public class MergeSort {
         }
     }
 
+    public static void mergeCountInternal(int[] arr, int s, int e) {
+        sum = 0;
+        if (s >= e) {
+            return;
+        }
+        int mid = s + ((e - s) / 2);
+        mergeCountInternal(arr, s, mid);
+        mergeCountInternal(arr, mid + 1, e);
+        mergeCount(arr, s, mid, e);
+    }
+
+    public static void mergeCount(int[] arr, int s, int mid, int e) {
+        int i = s;
+        int j = mid + 1;
+        int k = s;
+        while (i <= mid && j <= e) {
+            if (arr[i] <= arr[j]) {
+                brr[k] = arr[i];
+                i++;
+            } else {
+                sum += (mid - i + 1);
+                brr[k] = arr[j];
+                j++;
+            }
+            k++;
+        }
+        if (i > mid) {
+            while (j <= e) {
+                brr[k] = arr[j];
+                j++;
+                k++;
+            }
+        } else {
+            while (i <= mid) {
+                brr[k] = arr[i];
+                i++;
+                k++;
+            }
+        }
+        for (i = s; i <= e; i++) {
+            arr[i] = brr[i];
+        }
+    }
 
     public static void main(String[] args) {
         int[] arr = {0, 3, 1, 4, 9, 6, 5, 2};
@@ -73,10 +122,13 @@ public class MergeSort {
         for (int i: arr) {
             System.out.print(i);
         }
-        insertSort(nrr);
         System.out.println();
-        for (int i: arr) {
-            System.out.print(i);
-        }
+//        insertSort(nrr);
+//        System.out.println();
+//        for (int i: arr) {
+//            System.out.print(i);
+//        }
+        mergeCountSeq(nrr);
+        System.out.println(sum);
     }
 }
