@@ -7,6 +7,7 @@ public class EightQueen {
     public static void solution(int row) {
         if (row == 8) {
             print(result);
+            count++;
             return;
         }
         for (int column = 0; column < 8; column++) {
@@ -47,8 +48,8 @@ public class EightQueen {
                     return false;
                 }
             }
-            --leftup;
-            --rightup;
+            leftup--;
+            rightup++;
         }
         return true;
     }
