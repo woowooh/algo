@@ -1,7 +1,7 @@
 
 
 public class EightQueen {
-    static int[] result = new int[8];
+    static int[] result = new int[8]; // 下标 0, 1, 2, 3 代表行，value 为列
     static int count = 0;
 
     public static void solution(int row) {
@@ -18,9 +18,9 @@ public class EightQueen {
     }
 
     public static void print(int[] result) {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (result[i] == j) {
+        for (int row = 0; row < 8; row++) {
+            for (int column = 0; column < 8; column++) {
+                if (result[row] == column) {
                     System.out.print("Q ");
                 } else {
                     System.out.print("* ");
